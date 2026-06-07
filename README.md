@@ -24,32 +24,26 @@ Throughout: a **pizza-chain branch** + a **customer**. Everything is in-memory �
 
 ## Features & doc links
 
-The notebook keeps marker cells minimal; the source links live here.
+The notebook keeps marker cells minimal; the source links live here. Rows are in notebook order.
 
 | # | Feature | Version | Docs |
 |---|---------|---------|------|
 | 1 | Model profiles (`.profile`) | langchain v1.1 | https://docs.langchain.com/oss/python/langchain/models#model-profiles |
-| 2 | `SystemMessage` in `create_agent` | langchain v1.1 | https://docs.langchain.com/oss/python/langchain/agents · https://docs.langchain.com/oss/python/langchain/middleware/custom#dynamic-prompt |
-| 3 | Model-retry middleware | langchain v1.1 | https://docs.langchain.com/oss/python/langchain/middleware/built-in#model-retry |
-| 4 | Summarization middleware (profile-based trigger) | langchain v1.1 | https://docs.langchain.com/oss/python/langchain/middleware/built-in#summarization |
-| 5 | Content-moderation middleware (OpenAI) | langchain v1.1 | https://docs.langchain.com/oss/python/integrations/middleware/openai#content-moderation |
-| 6 | Structured output: `ProviderStrategy` + strict schema | langchain v1.1/1.2 | https://docs.langchain.com/oss/python/langchain/structured-output#provider-strategy |
-| 7 | `create_agent` tool `extras` (OpenAI `defer_loading`) | langchain v1.2 | https://docs.langchain.com/oss/python/langchain/tools · https://reference.langchain.com/python/langchain/tools/#langchain.tools.BaseTool.extras |
-| 8 | Event streaming v3 (`astream_events(..., version="v3")`) | langchain v1.3 | https://docs.langchain.com/oss/python/langchain/event-streaming |
-| 9 | Type-safe streaming (`version="v2"`, `StreamPart`) | langgraph v1.1 | https://docs.langchain.com/oss/python/langgraph/streaming#stream-output-format-v2 |
-| 10 | Type-safe invoke (`version="v2"`, `GraphOutput`) | langgraph v1.1 | https://docs.langchain.com/oss/python/langgraph/streaming#v2-invoke-format |
-| 11 | Pydantic/dataclass coercion (v2) | langgraph v1.1 | https://docs.langchain.com/oss/python/langgraph/streaming#v2-invoke-format |
-| 12 | `DeltaChannel` (beta) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/pregel#deltachannel-beta |
-| 13 | Per-node timeouts (`TimeoutPolicy`, `NodeTimeoutError`) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/fault-tolerance#timeouts · https://reference.langchain.com/python/langgraph/types/TimeoutPolicy |
-| 14 | Node-level error handlers (`error_handler`, `NodeError`, `Command`) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling |
-| 15 | Graceful shutdown (`RunControl`, `request_drain()`) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/durable-execution#graceful-shutdown · https://reference.langchain.com/python/langgraph/runtime/RunControl |
-| 16 | Event streaming v3 (beta, per-channel projections) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/streaming · https://docs.langchain.com/oss/python/releases/changelog |
+| 2 | Model-retry middleware (`ModelRetryMiddleware`) | langchain v1.1 | https://docs.langchain.com/oss/python/langchain/middleware/built-in#model-retry |
+| 3 | Summarization middleware (profile-based trigger) | langchain v1.1 | https://docs.langchain.com/oss/python/langchain/middleware/built-in#summarization |
+| 4 | Content-moderation middleware (OpenAI) | langchain v1.1 | https://docs.langchain.com/oss/python/integrations/middleware/openai#content-moderation |
+| 5 | Structured output: `ProviderStrategy` + strict schema | langchain v1.1/1.2 | https://docs.langchain.com/oss/python/langchain/structured-output#provider-strategy |
+| 6 | Event streaming v3 (`astream_events(version="v3")`; v2 shown first as a baseline) | langchain v1.3 | https://docs.langchain.com/oss/python/langchain/event-streaming |
+| 7 | `DeltaChannel` (beta) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/pregel#deltachannel |
+| 8 | Per-node timeouts (`TimeoutPolicy`, `NodeTimeoutError`) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/fault-tolerance#timeouts · https://reference.langchain.com/python/langgraph/types/TimeoutPolicy |
+| 9 | Node-level error handlers (`error_handler`, `NodeError`, `Command`) | langgraph v1.2 | https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling |
+| 10 | Graceful shutdown (`RunControl`, `request_drain()`) | langgraph v1.2 | https://reference.langchain.com/python/langgraph/runtime/RunControl · https://docs.langchain.com/oss/python/releases/changelog |
 
 ## Notes
 
-- `DeltaChannel` and the v3 streaming protocol on Pregel are **beta** (emit `LangChainBetaWarning`).
-- Chat-model objects validate `OPENAI_API_KEY` at construction time, so cells that build a model need the key set; the model-free LangGraph cells (9–16) run without any key.
-- Rebuild the notebook from source with `uv run python build_notebook.py`.
+- `DeltaChannel` is **beta** and emits `LangChainBetaWarning`.
+- The streaming demo runs `astream_events(version="v2")` first as a baseline, then the new `version="v3"` API for contrast.
+- Chat-model objects validate `OPENAI_API_KEY` at construction time, so cells that build a model need the key set; the model-free LangGraph demos (`DeltaChannel`, per-node timeouts, error handlers, graceful shutdown) run without any key.
 
 ## References
 
